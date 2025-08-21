@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auto Trigger Power Automate Flow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+    <script>
+        window.onload = function() {
+            fetch('https://prod-164.westus.logic.azure.com:443/workflows/e8e972da31094636983bd1aaf42e5870/triggers/manual/paths/invoke?api-version=2016-06-01', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({})
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('status').innerText = 'Flow triggered successfully!';
+            })
+            .catch(error => {
+                document.getElementById('status').innerText = 'Error triggering flow: ' + error;
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Triggering Flow...</h2>
+    <p id="status">Please wait while the flow is triggered.</p>
+</body>
+</html>
